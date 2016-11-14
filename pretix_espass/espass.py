@@ -155,5 +155,5 @@ class EspassOutput(BaseTicketOutput):
                 zipf.writestr('main.json', json.dumps(data, indent=4, separators=(',', ':')))
 
             with open(os.path.join(tmp_dir, 'tmp.zip'), 'rb') as zipf:
-                filename = 'foo_{}-{}.espass'.format(order.event.slug, order.code)
+                filename = 'pass_{}-{}.espass'.format(order.event.slug, order.code)
                 return filename, 'application/vnd.espass-espass+zip', zipf.read()
