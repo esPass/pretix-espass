@@ -71,6 +71,7 @@ class EspassOutput(BaseTicketOutput):
                 'type': 'EVENT',
                 'description': str(order.event.name),
                 'id': pass_id,
+                'accentColor': order.event.settings.primary_color,
                 'calendarTimespan': {
                     "from": order.event.date_from.isoformat(),
                 },
