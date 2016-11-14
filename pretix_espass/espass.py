@@ -5,6 +5,8 @@ from zipfile import ZipFile
 from typing import Tuple
 import os
 import json
+
+import pytz
 from django import forms
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.core.files.storage import default_storage
@@ -56,6 +58,7 @@ class EspassOutput(BaseTicketOutput):
 
     def generate(self, order_position: Order) -> Tuple[str, str, str]:
         order = order_position.order
+        tz = pytz.timezone(order.event.settings.timezone)
 
         ticket = str(order_position.item)
         if order_position.variation:
@@ -63,14 +66,27 @@ class EspassOutput(BaseTicketOutput):
 
         pass_id = '%s-%s' % (order.event.slug, order.code)
 
-        data = {'type': 'EVENT',
+        data = {'app': 'pretix',
+                'type': 'EVENT',
                 'description': str(order.event.name),
                 'id': pass_id,
-                'wtf': "1",
+                'calendarTimespan': {
+                    "from": order.event.date_from.isoformat(),
+                },
                 'locations': [
-
+                    # intentionally empty - will be populated later
                 ],
+                'barCode': {
+                    "format": "QR_CODE",
+                    "message": order_position.secret,
+                    "alternativeText": order_position.secret
+                },
                 'fields': [
+                    {
+                        "hide": False,
+                        "label": ugettext('Product'),
+                        "value": ticket
+                    },
                     {
                         "hide": False,
                         "label": ugettext('Product'),
@@ -91,8 +107,21 @@ class EspassOutput(BaseTicketOutput):
                         "label": ugettext('Organizer'),
                         "value": str(order.event.organizer)
                     },
+                    {
+                        "hide": False,
+                        "label": ugettext('From'),
+                        "value": order.event.get_date_from_display(tz)
+                    },
                 ]
                 }
+
+        if order.event.date_to:
+            data["calendarTimespan"]["to"] = order.event.date_to.isoformat()
+            data["fields"].append({
+                "label": ugettext('To'),
+                "value": order.event.get_date_to_display(tz),
+                "hide": False
+            })
 
         if order_position.attendee_name:
             data["fields"].append({
@@ -117,7 +146,6 @@ class EspassOutput(BaseTicketOutput):
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             with ZipFile(os.path.join(tmp_dir, 'tmp.zip'), 'w') as zipf:
-
                 icon_file = self.event.settings.get('ticketoutput_espass_icon')
                 zipf.writestr('icon.png', default_storage.open(icon_file.name, 'rb').read())
 
