@@ -12,6 +12,7 @@ from django.utils.translation import ugettext, ugettext_lazy as _
 from django.core.files.storage import default_storage
 from pretix.base.models import Order
 from pretix.base.ticketoutput import BaseTicketOutput
+from pretix.multidomain.urlreverse import build_absolute_uri
 
 from .forms import PNGImageField
 
@@ -88,11 +89,6 @@ class EspassOutput(BaseTicketOutput):
                         "value": ticket
                     },
                     {
-                        "hide": False,
-                        "label": ugettext('Product'),
-                        "value": ticket
-                    },
-                    {
                         "hide": True,
                         "label": ugettext('Ordered by'),
                         "value": order.email
@@ -111,6 +107,11 @@ class EspassOutput(BaseTicketOutput):
                         "hide": False,
                         "label": ugettext('From'),
                         "value": order.event.get_date_from_display(tz)
+                    },
+                    {
+                        "hide": True,
+                        "label": ugettext('Website'),
+                        "value": build_absolute_uri(order.event, 'presale:event.index')
                     },
                 ]
                 }
