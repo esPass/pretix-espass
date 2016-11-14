@@ -141,10 +141,11 @@ class EspassOutput(BaseTicketOutput):
 
         if self.event.settings.ticketoutput_espass_latitude and self.event.settings.ticketoutput_espass_longitude:
             data["locations"].append({
-                "name": self.event.settings.ticketoutput_espass_location_name,
                 "lat": self.event.settings.ticketoutput_espass_latitude,
                 "lon": self.event.settings.ticketoutput_espass_longitude
             })
+            if self.event.settings.ticketoutput_espass_location_name:
+                data["locations"]["name"] = self.event.settings.ticketoutput_espass_location_name
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             with ZipFile(os.path.join(tmp_dir, 'tmp.zip'), 'w') as zipf:
