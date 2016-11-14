@@ -15,7 +15,6 @@ class EspassApp(AppConfig):
         version = '1.0.0'
         description = "Provides esPass ticket download support"
         visible = True
-        version = '0.0'
 
     def ready(self):
         from . import signals  # NOQA
