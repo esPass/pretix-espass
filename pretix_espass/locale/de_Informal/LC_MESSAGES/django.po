@@ -1,0 +1,90 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-23 14:37+0100\n"
+"PO-Revision-Date: 2016-11-23 14:39+0100\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Raphael Michel <michel@rami.io>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.11\n"
+
+#: pretix_espass/__init__.py:14
+msgid "ligi"
+msgstr "ligi"
+
+#: pretix_espass/espass.py:32
+msgid "Event icon"
+msgstr "Veranstaltungs-Icon"
+
+#: pretix_espass/espass.py:33
+msgid "We suggest an upload size of 96x96 pixels - the display size is 48dp"
+msgstr "Wir empfehlen eine Bildgröße von 96x96 Pixeln. Die Anzeigegröße ist 48px."
+
+#: pretix_espass/espass.py:38
+msgid "Event logo"
+msgstr "Veranstaltungs-Logo"
+
+#: pretix_espass/espass.py:39
+msgid "Upload a nice big image - size depends on the device - example size 800x600"
+msgstr "Wir empfehlen ein schönes großes Bild. Die Anzeigegröße ist geräteabhängig, z.B. 800x600 Pixel."
+
+#: pretix_espass/espass.py:44
+msgid "Event location name"
+msgstr "Veranstaltungsort (Breitengrad)"
+
+#: pretix_espass/espass.py:49
+msgid "Event location latitude"
+msgstr "Veranstaltungsort (Breitengrad)"
+
+#: pretix_espass/espass.py:54
+msgid "Event location longitude"
+msgstr "Veranstaltungsort (Längengrad)"
+
+#: pretix_espass/espass.py:89
+msgid "Product"
+msgstr "Produkt"
+
+#: pretix_espass/espass.py:94
+msgid "Ordered by"
+msgstr "Bestellt von"
+
+#: pretix_espass/espass.py:99
+msgid "Order code"
+msgstr "Bestellnummer"
+
+#: pretix_espass/espass.py:104
+msgid "Organizer"
+msgstr "Veranstalter"
+
+#: pretix_espass/espass.py:109
+msgid "From"
+msgstr "Von"
+
+#: pretix_espass/espass.py:114
+msgid "Website"
+msgstr "Website"
+
+#: pretix_espass/espass.py:123
+msgid "To"
+msgstr "Bis"
+
+#: pretix_espass/espass.py:130
+msgid "Attendee name"
+msgstr "Teilnehmer"
+
+#: pretix_espass/espass.py:137
+msgid "Organizer contact"
+msgstr "Veranstalterkontakt"
+
+#: pretix_espass/forms.py:35
+msgid "The file you uploaded could not be converted to PNG format."
+msgstr "Die hochgeladene Datei konnte nicht ins PNG-Format konvertiert werden."
