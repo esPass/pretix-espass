@@ -145,7 +145,7 @@ class EspassOutput(BaseTicketOutput):
                 "lon": self.event.settings.ticketoutput_espass_longitude
             })
             if self.event.settings.ticketoutput_espass_location_name:
-                data["locations"]["name"] = self.event.settings.ticketoutput_espass_location_name
+                data["locations"][-1]["name"] = self.event.settings.ticketoutput_espass_location_name
 
         with tempfile.TemporaryDirectory() as tmp_dir:
             with ZipFile(os.path.join(tmp_dir, 'tmp.zip'), 'w') as zipf:
