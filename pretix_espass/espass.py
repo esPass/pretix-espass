@@ -1,15 +1,14 @@
+import json
+import os
 import tempfile
 from collections import OrderedDict
-from zipfile import ZipFile
-
 from typing import Tuple
-import os
-import json
+from zipfile import ZipFile
 
 import pytz
 from django import forms
-from django.utils.translation import ugettext, ugettext_lazy as _
 from django.core.files.storage import default_storage
+from django.utils.translation import ugettext, ugettext_lazy as _  # NOQA
 from pretix.base.models import Order
 from pretix.base.ticketoutput import BaseTicketOutput
 from pretix.multidomain.urlreverse import build_absolute_uri
@@ -124,6 +123,33 @@ class EspassOutput(BaseTicketOutput):
                 "value": order.event.get_date_to_display(tz),
                 "hide": False
             })
+
+        if order.event.seating_plan_id is not None:
+            if order_position.seat:
+                if order_position.seat.zone_name:
+                    data["fields"].append({
+                        "label": ugettext('Zone'),
+                        "value": order_position.seat.zone_name,
+                        "hide": False
+                    })
+                if order_position.seat.row_name:
+                    data["fields"].append({
+                        "label": ugettext('Row'),
+                        "value": order_position.seat.row_name,
+                        "hide": False
+                    })
+                if order_position.seat.seat_number:
+                    data["fields"].append({
+                        "label": ugettext('Seat'),
+                        "value": order_position.seat.seat_number,
+                        "hide": False
+                    })
+            else:
+                data["fields"].append({
+                    "label": ugettext('Seat'),
+                    "value": ugettext('General admission'),
+                    "hide": False
+                })
 
         if order_position.attendee_name:
             data["fields"].append({
