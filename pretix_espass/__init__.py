@@ -1,6 +1,5 @@
 from django.apps import AppConfig
 from django.utils.functional import cached_property
-from django.utils.translation import ugettext_lazy as _
 from pretix.base.plugins import PluginType
 
 
@@ -11,8 +10,8 @@ class EspassApp(AppConfig):
     class PretixPluginMeta:
         type = PluginType.ADMINFEATURE
         name = "esPass Tickets"
-        author = _("ligi")
-        version = '1.0.0'
+        author = "ligi"
+        version = '1.1.0'
         description = "Provides esPass ticket download support"
         visible = True
 
