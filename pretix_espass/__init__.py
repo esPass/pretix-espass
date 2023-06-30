@@ -11,7 +11,7 @@ class EspassApp(AppConfig):
         type = PluginType.ADMINFEATURE
         name = "esPass Tickets"
         author = "ligi"
-        version = '1.0.0'
+        version = '1.1.0'
         description = "Provides esPass ticket download support"
         visible = True
 

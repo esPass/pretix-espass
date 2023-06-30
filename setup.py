@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pretix-espass',
-    version='0.0.0',
+    version='1.1.0',
     description='esPass support for pretix',
     long_description='Provides support for the esPass ticket format',
     url='https://github.com/espass/pretix-espass',
